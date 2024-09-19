@@ -1,0 +1,115 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Wheat From Organic Farms",
+            "image": "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/wheat.jpg",
+            "costPrice": 50.00,
+            "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque quis ipsam aliquid quasi dolorum laborum voluptatibus alias laboriosam non tempora!",
+            "sellingPrice": 40.00,
+            "rating": 5,
+            "onSale": true,
+            "quantity": 10
+        },
+        {
+            "id": 2,
+            "name": "Hand Sanitizer",
+            "image": "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/sanitizer.jpg",
+            "costPrice": 60.00,
+            "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque quis ipsam aliquid quasi dolorum laborum voluptatibus alias laboriosam non tempora!",
+            "sellingPrice": 50.00,
+            "rating": 4.5,
+            "onSale": false,
+            "quantity": 10
+        },
+        {
+            "id": 3,
+            "name": "Handpicked Red Chillies",
+            "image": "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/red-chillies-600x600.jpg",
+            "costPrice": 50.00,
+            "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque quis ipsam aliquid quasi dolorum laborum voluptatibus alias laboriosam non tempora!",
+            "sellingPrice": 40.00,
+            "rating": 3,
+            "onSale": false,
+            "quantity": 10
+        },
+        {
+            "id": 4,
+            "name": "Natural Extracted Edible Oil",
+            "image": "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/edible-oil.jpg",
+            "costPrice": 50.00,
+            "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque quis ipsam aliquid quasi dolorum laborum voluptatibus alias laboriosam non tempora!",
+            "sellingPrice": 40.00,
+            "rating": 5,
+            "onSale": true,
+            "quantity": 10
+        },
+        {
+            "id": 5,
+            "name": "Assorted Coffee",
+            "image": "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/coffee-asorted.jpg",
+            "costPrice": 50.00,
+            "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque quis ipsam aliquid quasi dolorum laborum voluptatibus alias laboriosam non tempora!",
+            "sellingPrice": 40.00,
+            "rating": 4,
+            "onSale": false,
+            "quantity": 10
+        },
+        {
+            "id": 6,
+            "name": "Fresh Orange Juice",
+            "image": "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/orage-juice-kariz.jpg",
+            "costPrice": 50.00,
+            "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque quis ipsam aliquid quasi dolorum laborum voluptatibus alias laboriosam non tempora!",
+            "sellingPrice": 40.00,
+            "rating": 0,
+            "onSale": false,
+            "quantity": 10
+        },
+        {
+            "id": 7,
+            "name": "Pulses From Organic Farm",
+            "image": "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/pulses.jpg",
+            "costPrice": 50.00,
+            "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque quis ipsam aliquid quasi dolorum laborum voluptatibus alias laboriosam non tempora!",
+            "sellingPrice": 40.00,
+            "rating": 5,
+            "onSale": false,
+            "quantity": 10
+        },
+        {
+            "id": 8,
+            "name": "Cashew Butter",
+            "image": "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/cashew-butter-500.jpg",
+            "costPrice": 50.00,
+            "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque quis ipsam aliquid quasi dolorum laborum voluptatibus alias laboriosam non tempora!",
+            "sellingPrice": 40.00,
+            "rating": 5,
+            "onSale": false,
+            "quantity": 10
+        },
+        {
+            "id": 9,
+            "name": "Diabetic Cookies",
+            "image": "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2018/06/diabetic-cookies.jpg",
+            "costPrice": 50.00,
+            "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque quis ipsam aliquid quasi dolorum laborum voluptatibus alias laboriosam non tempora!",
+            "sellingPrice": 40.00,
+            "rating": 5,
+            "onSale": false,
+            "quantity": 10
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "groceries",
+            "productsId": [2, 3, 4, 5, 7, 6]
+        },
+        {
+            "id": 2,
+            "name": "juice",
+            "productsId": [1, 6, 7, 8, 9, 3]
+        }
+    ]
+}

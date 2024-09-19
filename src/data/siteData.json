@@ -1,0 +1,83 @@
+{
+    "siteLogo": "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2019/06/organic-store-logo5.svg",
+    "navbar": {
+        "rightLinks": [
+            {
+                "id": 1,
+                "name": "About",
+                "path": "/about"
+            },
+            {
+                "id": 2,
+                "name": "Contact",
+                "path": "/contact"
+            }
+        ],
+        "leftLinks": [
+            {
+                "id": 1,
+                "name": "Everything",
+                "path": "/shop"
+            },
+            {
+                "id": 2,
+                "name": "Groceries",
+                "path": "/shop/groceries"
+            },
+            {
+                "id": 3,
+                "name": "Juice",
+                "path": "/shop/juice"
+            }
+        ]
+    },
+    "serviceCard":[
+        {
+            "id": 1,
+            "title": "Free Shipping",
+            "description": "Above $5 Only",
+            "icon": "dolly"
+        },
+        {
+            "id": 2,
+            "title": "Certified Organic",
+            "description": "100% Guarantee",
+            "icon": "address-book"
+        },
+        {
+            "id": 3,
+            "title": "Huge Savings",
+            "description": "At Lowest Price",
+            "icon": "money-check-dollar"
+        },
+        {
+            "id": 4,
+            "title": "Easy Returns",
+            "description": "No Questions Asked",
+            "icon": "recycle"
+        }
+    ],
+    "sellingProductsId":[1, 2, 3, 4],
+    "trendingProductsId":[5, 3, 6, 9],
+    "sidebarProductsId":[7, 8, 9],
+    "freshArrivals":[
+        {
+            "id": 1,
+            "title": "Farm Fresh Fruits",
+            "description": "Aliquam porta justo nibh, id laoreet sapien sodales vitae justo.",
+            "image": "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2019/06/product11-free-img.jpg"
+        },
+        {
+            "id": 2,
+            "title": "Fresh Vegetables",
+            "description": "Aliquam porta justo nibh, id laoreet sapien sodales vitae justo.",
+            "image": "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2019/06/product13-free-img.jpg"
+        },
+        {
+            "id": 3,
+            "title": "Organic Legume",
+            "description": "Aliquam porta justo nibh, id laoreet sapien sodales vitae justo.",
+            "image": "https://websitedemos.net/organic-shop-02/wp-content/uploads/sites/465/2019/06/product17-free-img.jpg"
+        }
+    ]
+}
