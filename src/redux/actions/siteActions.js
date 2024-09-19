@@ -10,7 +10,7 @@ export const fetchSiteData = () => {
     try {
       dispatch({ type: FETCH_SITE_DATA_REQUEST });
 
-      const response = await axios.get('https://run.mocky.io/v3/6b18ed5b-9b7a-4a03-97a8-f1ce7d7994e8');
+      const response = await axios.get('https://run.mocky.io/v3/b340ef0b-d368-4af0-86d1-a5964291ea02');
       
       dispatch({
         type: FETCH_SITE_DATA_SUCCESS,

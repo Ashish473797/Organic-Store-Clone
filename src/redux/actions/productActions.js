@@ -9,7 +9,7 @@ export const fetchProductData = () => {
     try {
       dispatch({ type: FETCH_PRODUCT_DATA_REQUEST });
 
-      const response = await axios.get('https://run.mocky.io/v3/9297301c-741d-44bc-ac12-b771dbab2634');
+      const response = await axios.get('https://run.mocky.io/v3/c9ff4734-4dd3-4e35-9e61-aa1027b8622e');
       
       dispatch({
         type: FETCH_PRODUCT_DATA_SUCCESS,
