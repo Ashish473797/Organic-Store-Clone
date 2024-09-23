@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../button/Button"
 
 function FreshCard({ title, description, image }) {
@@ -13,7 +14,7 @@ function FreshCard({ title, description, image }) {
     >
       <h2 className="text-2xl font-bold">{title}</h2>
       <p>{description}</p>
-      <div><Button icon="arrow-right">SHOP NOW</Button></div>
+      <div><Link to="/shop"><Button icon="arrow-right">SHOP NOW</Button></Link></div>
     </div>
   );
 }
