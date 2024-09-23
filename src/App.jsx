@@ -1,10 +1,9 @@
 import CommonLayout from "./layouts/common-layout/CommonLayout";
-import RoutesList from "./routes/Routes.jsx";
-
+import RoutesList from "./routes/RoutesList.jsx";
 import { useDispatch } from "react-redux";
-import { fetchProductData } from "./redux/actions/productActions.js";
-import { fetchSiteData } from "./redux/actions/siteActions.js";
 import { useEffect } from "react";
+import { fetchProductData } from "./redux/product-data/ProductSlice.js";
+import { fetchSiteData } from "./redux/site-data/siteDataSlice.js";
 
 function App() {
 
@@ -13,7 +12,7 @@ function App() {
   useEffect(()=>{
     dispatch(fetchProductData());
     dispatch(fetchSiteData());
-  },[dispatch])
+  },[])
 
   return (
         <CommonLayout>

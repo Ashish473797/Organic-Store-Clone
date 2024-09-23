@@ -1,17 +1,22 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import Button from "../../components/button/Button";
-import ProductCard from "../../components/product-card/ProductCard";
 import SidebarProductCard from "../../components/sidebar-productCard/SidebarProductCard";
 import { Link, useParams } from "react-router-dom";
 import PageNotFound from "../page-not-found/PageNotFound";
 import { useSelector } from "react-redux";
+import { ClipLoader } from "react-spinners";
 
 function Category() {
+  const ProductCard = lazy(() =>
+    import("../../components/product-card/ProductCard")
+  );
 
   const { category } = useParams();
 
-  const {productData} = useSelector((state) => state.productData);
- 
+  const { productData, loading } = useSelector((state) => state.productData);
+
+  /* ------------------ range selector ---------------------- */
+
   const [minPrice, setMinPrice] = useState(10);
   const [maxPrice, setMaxPrice] = useState(100);
   const priceGap = 10;
@@ -51,8 +56,11 @@ function Category() {
     }
   };
 
+  /* ----------------------------------------------- */
+
+  // refactor
   const getProductById = (id) => {
-    const product = productData.products.find((product) => product.id === id);
+    const product = productData.products?.find((product) => product.id === id);
 
     if (product) {
       const categories = productData.categories
@@ -69,7 +77,7 @@ function Category() {
   if (category && productData?.categories) {
     const categoryNames = productData.categories.map((cat) => cat.name);
     if (!categoryNames.includes(category)) {
-       return <PageNotFound />;
+      return <PageNotFound />;
     }
   }
 
@@ -177,7 +185,11 @@ function Category() {
         </div>
         <div className="basis-[75%] pl-12">
           <div>
-            <p className="text-gray-500 mb-6">Home / Shop{category && " / " + category.charAt(0).toUpperCase() + category.slice(1)}</p>
+            <p className="text-gray-500 mb-6">
+              Home / Shop
+              {category &&
+                " / " + category.charAt(0).toUpperCase() + category.slice(1)}
+            </p>
             <h1 className="text-5xl font-bold text-[#8BC34A] mb-12">
               {category
                 ? category.charAt(0).toUpperCase() + category.slice(1)
@@ -197,6 +209,17 @@ function Category() {
               <div>Showing 1-9 of 10 results</div>
               <div>Default sorting</div>
             </div>
+            {loading && (
+              <div className="flex justify-center items-center min-h-[50vh]">
+                <ClipLoader
+                  color={"black"}
+                  loading={true}
+                  size={100}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            )}
             <div className="grid grid-cols-3 py-8 gap-4">
               {category && productData?.categories
                 ? productData.categories
@@ -204,29 +227,33 @@ function Category() {
                     ?.productsId.map((productId) => {
                       const product = getProductById(productId);
                       return product ? (
-                        <ProductCard
-                          id={product.id}
-                          key={product.id}
-                          name={product.name}
-                          image={product.image}
-                          price={product.sellingPrice}
-                          rating={product.rating}
-                          onSale={product.onSale}
-                          categories={product.categories} // Passing categories here
-                        />
+                        <Suspense fallback={<div>loading...</div>}>
+                          <ProductCard
+                            id={product.id}
+                            key={product.id}
+                            name={product.name}
+                            image={product.image}
+                            price={product.sellingPrice}
+                            rating={product.rating}
+                            onSale={product.onSale}
+                            categories={product.categories}
+                          />
+                        </Suspense>
                       ) : null;
                     })
                 : productData?.products?.map((product) => (
-                    <ProductCard
-                      id={product.id}
-                      key={product.id}
-                      name={product.name}
-                      image={product.image}
-                      price={product.sellingPrice}
-                      rating={product.rating}
-                      onSale={product.onSale}
-                      categories={getProductById(product.id)?.categories} // Passing categories for all products
-                    />
+                    <Suspense fallback={<div>loading...</div>}>
+                      <ProductCard
+                        id={product.id}
+                        key={product.id}
+                        name={product.name}
+                        image={product.image}
+                        price={product.sellingPrice}
+                        rating={product.rating}
+                        onSale={product.onSale}
+                        categories={getProductById(product.id)?.categories}
+                      />
+                    </Suspense>
                   ))}
             </div>
           </div>

@@ -4,13 +4,16 @@ import Button from "../../components/button/Button";
 import ProductCard from "../../components/product-card/ProductCard";
 import NotFound from "../page-not-found/PageNotFound";
 import { useSelector } from "react-redux";
+import { ClipLoader } from "react-spinners";
 
 function Product() {
-
-  const {productData} = useSelector(state => state.productData);
+  const { productData, loading } = useSelector((state) => state.productData);
+  console.log(productData);
 
   const { product } = useParams();
-  const productName = product.split('-').join(' ');
+  const productName = product.split("-").join(" ");
+
+  /* -------------------------- zoom effect --------------------------- */
 
   const [isZoomed, setIsZoomed] = useState(false);
   const [transform, setTransform] = useState({ x: 0, y: 0 });
@@ -34,11 +37,14 @@ function Product() {
     setQuantity(e.target.value);
   };
 
+  /* ------------------------------------------------------------------ */
+
+  // refactor
   if (!productData) {
     return <div className="text-center">Loading...</div>;
   }
 
-  const foundProduct = productData.products.find(
+  const foundProduct = productData.products?.find(
     (item) => item.name.toLowerCase() === productName.toLowerCase()
   );
 
@@ -46,9 +52,19 @@ function Product() {
     return <NotFound />;
   }
 
-
   return (
     <div className="bg-[#F8F6F3]">
+      {loading && (
+        <div className="flex justify-center items-center min-h-[80vh]">
+          <ClipLoader
+            color={"black"}
+            loading={true}
+            size={100}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      )}
       <div className="container mx-auto px-36 py-16">
         <div className="flex">
           {/* Image Zoom Section */}
@@ -93,9 +109,7 @@ function Product() {
                   className="p-2 w-20 border"
                   onChange={handleQuantityChange}
                 />
-                <Button className="px-20">
-                  ADD TO CART
-                </Button>
+                <Button className="px-20">ADD TO CART</Button>
               </div>
               <hr />
               <p className="text-sm text-gray-600">

@@ -1,42 +1,51 @@
+import { ErrorBoundary } from 'react-error-boundary';
 import ServiceCard from "../../components/service-card/ServiceCard";
-import ProductCard from "../../components/product-card/ProductCard";
 import FreshCard from "../../components/fresh-card/FreshCard";
 import Button from "../../components/button/Button";
 import FeaturedProducts from "../../sections/featured-products/FeaturedProducts";
 import { useSelector } from "react-redux";
 import { ClipLoader } from "react-spinners";
+import { lazy, Suspense } from "react";
 
+function ErrorFallback({ error, resetErrorBoundary }) {
+  return (
+    <div role="alert" className="flex justify-center items-center min-h-[80vh]">
+      <div>
+        <h2>Something went wrong:</h2>
+        <pre>{error.message}</pre>
+        <button onClick={resetErrorBoundary} className="mt-4 p-2 bg-red-500 text-white">
+          Try again
+        </button>
+      </div>
+    </div>
+  );
+}
 
 function Home() {
-  
+  const ProductCard = lazy(() => import("../../components/product-card/ProductCard"));
 
-  const {productData} = useSelector((state) => state.productData);
-  const {siteData} = useSelector((state) => state.siteData);
+  const { productData, loading } = useSelector((state) => state.productData);
+  const { siteData } = useSelector((state) => state.siteData);
 
-  if (!siteData || !productData) {
-    return <div className="flex justify-center items-center min-h-[100vh]">
-      <ClipLoader
-      color={"black"}
-      loading={true}
-      size={100}
-      aria-label="Loading Spinner"
-      data-testid="loader"
-        />
-    </div>
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[80vh]">
+        <ClipLoader color={"black"} loading={true} size={100} aria-label="Loading Spinner" data-testid="loader" />
+      </div>
+    );
   }
 
-  const getProductsById = (ids) =>
-    productData.products.filter((product) => ids.includes(product.id));
+  // refactor
+  const getProductsById = (ids) => productData.products?.filter((product) => ids?.includes(product.id));
 
   const getProductCategories = (productId) => {
     const categories = productData.categories
       .filter((category) => category.productsId.includes(productId))
-      .map((category) => category.name);
+      ?.map((category) => category.name);
     return categories.join(", ");
   };
-
   return (
-    <>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
       {/* hero section */}
       <div className="h-[78vh] bg-[#FAFAF7] relative">
         <div className="h-full container mx-auto px-36 flex gap-8 items-center">
@@ -53,16 +62,10 @@ function Home() {
                 alt="leaves"
               />
             </div>
-            <p className="text-lg text-slate-800 font-bold">
-              Best Quality Products
-            </p>
-            <h1 className="text-6xl text-slate-800 font-bold">
-              Join The Organic Movement!
-            </h1>
+            <p className="text-lg text-slate-800 font-bold">Best Quality Products</p>
+            <h1 className="text-6xl text-slate-800 font-bold">Join The Organic Movement!</h1>
             <p className="text-slate-800">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque
-              quis ipsam aliquid quasi dolorum laborum voluptatibus alias
-              laboriosam non tempora!
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque quis ipsam aliquid quasi dolorum laborum voluptatibus alias laboriosam non tempora!
             </p>
             <div>
               <Button icon="cart-shopping">SHOP NOW</Button>
@@ -79,30 +82,27 @@ function Home() {
       {/* service section */}
       <div className="bg-[#111111] py-12">
         <div className="container mx-auto px-36 grid grid-cols-4 gap-8">
-          {siteData.serviceCard.map((item) => (
-            <ServiceCard
-              key={item.id}
-              title={item.title}
-              description={item.description}
-              icon={item.icon}
-            />
+          {siteData.serviceCard?.map((item) => (
+            <ServiceCard key={item.id} title={item.title} description={item.description} icon={item.icon} />
           ))}
         </div>
       </div>
 
       {/* best selling products */}
       <FeaturedProducts title="Best Selling Products">
-        {getProductsById(siteData.sellingProductsId).map((product) => (
-          <ProductCard
-            id={product.id}
-            key={product.id}
-            name={product.name}
-            image={product.image}
-            price={product.sellingPrice}
-            rating={product.rating}
-            onSale={product.onSale}
-            categories={getProductCategories(product.id)}
-          />
+        {getProductsById(siteData.sellingProductsId)?.map((product) => (
+          <Suspense fallback={<div>loading...</div>} key={product.id}>
+            <ProductCard
+              id={product.id}
+              key={product.id}
+              name={product.name}
+              image={product.image}
+              price={product.sellingPrice}
+              rating={product.rating}
+              onSale={product.onSale}
+              categories={getProductCategories(product.id)}
+            />
+          </Suspense>
         ))}
       </FeaturedProducts>
 
@@ -115,48 +115,41 @@ function Home() {
         />
         <div className="container mx-auto px-36">
           <div className="grid grid-cols-3 gap-6">
-            {siteData.freshArrivals.map((item) => (
-              <FreshCard
-                key={item.id}
-                title={item.title}
-                description={item.description}
-                image={item.image}
-              />
+            {siteData.freshArrivals?.map((item) => (
+              <FreshCard key={item.id} title={item.title} description={item.description} image={item.image} />
             ))}
           </div>
         </div>
         <div className="bg-black relative">
           <div className="container mx-auto px-36 flex justify-between items-center py-12 mt-28 mb-12">
-            <h2 className="text-white text-4xl">
-              Get 25% Off On Your First Purchase!
-            </h2>
+            <h2 className="text-white text-4xl">Get 25% Off On Your First Purchase!</h2>
             <div>
               <Button icon="cart-shopping">SHOP NOW</Button>
             </div>
           </div>
           <i className="fa-solid fa-sort-down absolute text-5xl bottom-[-16px] right-[50%]"></i>
         </div>
-        <h2 className="text-center text-2xl">
-          Try It For Free. No Registration Needed.
-        </h2>
+        <h2 className="text-center text-2xl">Try It For Free. No Registration Needed.</h2>
       </div>
 
       {/* trending products */}
       <FeaturedProducts title="Trending Products">
-        {getProductsById(siteData.trendingProductsId).map((product) => (
-          <ProductCard
-            id={product.id}
-            key={product.id}
-            name={product.name}
-            image={product.image}
-            price={product.sellingPrice}
-            rating={product.rating}
-            onSale={product.onSale}
-            categories={getProductCategories(product.id)}
-          />
+        {getProductsById(siteData.trendingProductsId)?.map((product) => (
+          <Suspense fallback={<div>loading.............</div>} key={product.id}>
+            <ProductCard
+              id={product.id}
+              key={product.id}
+              name={product.name}
+              image={product.image}
+              price={product.sellingPrice}
+              rating={product.rating}
+              onSale={product.onSale}
+              categories={getProductCategories(product.id)}
+            />
+          </Suspense>
         ))}
       </FeaturedProducts>
-    </>
+    </ErrorBoundary>
   );
 }
 
